@@ -3,7 +3,11 @@
 FastAPI + React application that helps Indian citizens research legal questions, chat with an AI trained on Indian law PDFs, discover specialised advocates, and coordinate consultations—all backed by a retrieval-augmented generation (RAG) pipeline, Groq LLM, and PostgreSQL.
 
 ---
+## Homepage
+![homepage](https://github.com/Vaishnavii-23/LawBot-AI-Powered-Legal-Assistant-Lawyer-Booking-Platform/blob/main/demo-images/Screenshot%202025-11-28%20232636.png)
 
+---
+> other demo pages in the  demo-images folder
 ## Features
 
 - **Conversational AI chatbot** with chat history, session titles, and structured replies tuned for Indian legal guidance.
@@ -253,5 +257,6 @@ _Add screenshots or GIFs showcasing the chat experience, dashboards, and booking
 ## License
 
 Licensed under the [MIT License](https://opensource.org/licenses/MIT). Feel free to reuse and adapt—just retain attribution and the original license notice.
+
 
 
