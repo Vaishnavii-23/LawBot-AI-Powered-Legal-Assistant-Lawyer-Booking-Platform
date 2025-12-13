@@ -6,7 +6,7 @@ import urllib.parse
 
 # ---- PostgreSQL settings ----
 DB_USER = "postgres"
-DB_PASSWORD = "root"  # <-- yahan woh password jo tumne install ke time diya
+DB_PASSWORD = "xxxx"  # <-- yahan woh password jo tumne install ke time diya
 DB_HOST = "localhost"
 DB_PORT = "5432"
 DB_NAME = "lawbot"
@@ -35,3 +35,4 @@ def get_db():
         yield db
     finally:
         db.close()
+
