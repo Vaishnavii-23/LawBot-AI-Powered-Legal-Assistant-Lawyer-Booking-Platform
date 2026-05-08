@@ -3,7 +3,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import (
+from app.api.route import (
+    admin,
     auth,
     booking_requests,
     bookings,
@@ -48,3 +49,4 @@ app.include_router(booking_requests.router)
 app.include_router(reviews.router)
 app.include_router(chat.router)
 app.include_router(auth.router)
+app.include_router(admin.router)

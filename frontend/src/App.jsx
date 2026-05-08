@@ -2,7 +2,9 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./components/Footer.jsx";
 import Navbar from "./components/Navbar.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import AuthenticatedLayout from "./components/AuthenticatedLayout.jsx";
 import About from "./pages/About.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import Contact from "./pages/Contact.jsx";
 import Home from "./pages/Home.jsx";
@@ -18,25 +20,46 @@ const App = () => {
   const location = useLocation();
   const isChatRoute = location.pathname.startsWith("/chat");
   const isRegisterRoute = location.pathname.startsWith("/register");
+  const isAuthenticatedRoute = location.pathname.startsWith("/chat") || 
+                               location.pathname.startsWith("/lawyers") ||
+                               location.pathname.startsWith("/user/") ||
+                               location.pathname.startsWith("/lawyer/") ||
+                               location.pathname.startsWith("/admin/");
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Navbar />
+      {!isAuthenticatedRoute && <Navbar />}
       <main className={`flex-1 ${isChatRoute ? "min-h-screen" : ""}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/lawyers" element={<LawyersDirectory />} />
-          <Route path="/lawyers/:id" element={<LawyerDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/chat" element={<ChatPage />} />
+          
+          {/* Authenticated routes with sidebar */}
+          <Route path="/lawyers" element={
+            <AuthenticatedLayout>
+              <LawyersDirectory />
+            </AuthenticatedLayout>
+          } />
+          <Route path="/lawyers/:id" element={
+            <AuthenticatedLayout>
+              <LawyerDetail />
+            </AuthenticatedLayout>
+          } />
+          <Route path="/chat" element={
+            <AuthenticatedLayout>
+              <ChatPage />
+            </AuthenticatedLayout>
+          } />
           <Route
             path="/user/dashboard"
             element={
               <ProtectedRoute requiredRole="user">
-                <UserDashboard />
+                <AuthenticatedLayout>
+                  <UserDashboard />
+                </AuthenticatedLayout>
               </ProtectedRoute>
             }
           />
@@ -44,14 +67,26 @@ const App = () => {
             path="/lawyer/dashboard"
             element={
               <ProtectedRoute requiredRole="lawyer">
-                <LawyerDashboard />
+                <AuthenticatedLayout>
+                  <LawyerDashboard />
+                </AuthenticatedLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AuthenticatedLayout>
+                  <AdminDashboard />
+                </AuthenticatedLayout>
               </ProtectedRoute>
             }
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      {!isChatRoute && !isRegisterRoute ? <Footer /> : null}
+      {!isChatRoute && !isRegisterRoute && !isAuthenticatedRoute && <Footer />}
     </div>
   );
 };
