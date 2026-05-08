@@ -98,7 +98,7 @@ FastAPI + React application that helps Indian citizens research legal questions,
 ### 2. Clone the repository
 
 ```bash
-git clone https://github.com/Vaishnavii-23/lawpal.git
+git clone https://github.com/Vaishnavii-23/LawBot-AI-Powered-Legal-Assistant-Lawyer-Booking-Platform.git
 cd lawpal
 ```
 
