@@ -10,12 +10,17 @@ const ProtectedRoute = ({ children, requiredRole }) => {
   }
 
   if (requiredRole && user?.role !== requiredRole) {
+    const roleNames = {
+      lawyer: "lawyers",
+      user: "users",
+      admin: "administrators"
+    };
     return (
       <div className="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center text-center">
         <div className="rounded-3xl bg-white p-10 shadow-soft">
           <p className="text-xl font-semibold text-brand-600">Access denied</p>
           <p className="mt-2 text-slate-600">
-            This area is reserved for {requiredRole === "lawyer" ? "lawyers" : "users"}. If you believe this is an error,
+            This area is reserved for {roleNames[requiredRole] || requiredRole}. If you believe this is an error,
             please contact support.
           </p>
         </div>
