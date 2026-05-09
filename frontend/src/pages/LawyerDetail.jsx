@@ -142,22 +142,20 @@ const LawyerDetail = () => {
                 <div>
                   <label className="text-sm font-semibold text-slate-700">Preferred date</label>
                   <input
-                    type="text"
+                    type="date"
                     required
                     value={bookingForm.date}
                     onChange={(event) => setBookingForm((prev) => ({ ...prev, date: event.target.value }))}
-                    placeholder="23/11/2026"
                     className="mt-2 w-full rounded-2xl border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100"
                   />
                 </div>
                 <div>
                   <label className="text-sm font-semibold text-slate-700">Preferred time</label>
                   <input
-                    type="text"
+                    type="time"
                     required
                     value={bookingForm.time}
                     onChange={(event) => setBookingForm((prev) => ({ ...prev, time: event.target.value }))}
-                    placeholder="6pm"
                     className="mt-2 w-full rounded-2xl border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100"
                   />
                 </div>

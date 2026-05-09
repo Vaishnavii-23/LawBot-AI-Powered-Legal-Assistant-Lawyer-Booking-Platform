@@ -28,7 +28,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/95 backdrop-blur-lg shadow-sm">
+    <header className="sticky top-0 z-20 border-b border-slate-100 bg-white/95 backdrop-blur-lg shadow-sm">
       <div className={`flex items-center justify-between px-4 py-2.5 sm:px-6 transition-all duration-300 ${isAuthenticated ? (sidebarOpen ? 'lg:ml-64' : 'lg:ml-0') : 'lg:px-8 mx-auto max-w-7xl'}`}>
         <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
           <span className={`flex items-center justify-center rounded-lg ${isAuthenticated ? 'h-9 w-9 text-lg' : 'h-10 w-10 text-2xl'} bg-gradient-to-br from-brand-100 to-brand-50 hover:shadow-md transition-shadow`}>
