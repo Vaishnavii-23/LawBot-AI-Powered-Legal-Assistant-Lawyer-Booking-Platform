@@ -6,9 +6,9 @@ const AuthContext = createContext({
   user: null,
   isAuthenticated: false,
   initializing: true,
-  login: async () => {},
-  signup: async () => {},
-  logout: () => {}
+  login: async () => { },
+  signup: async () => { },
+  logout: () => { }
 });
 
 const STORAGE_KEY = "lawbot_user";
@@ -38,6 +38,8 @@ export const AuthProvider = ({ children }) => {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(account));
       if (account.role === "lawyer") {
         navigate("/lawyer/dashboard", { replace: true });
+      } else if (account.role === "admin") {
+        navigate("/admin/dashboard", { replace: true });
       } else {
         navigate("/user/dashboard", { replace: true });
       }
@@ -46,8 +48,8 @@ export const AuthProvider = ({ children }) => {
   );
 
   const login = useCallback(
-    async ({ email, role }) => {
-      const account = await loginUser({ email, role });
+    async ({ email, password, role }) => {
+      const account = await loginUser({ email, password, role });
       handleAuthSuccess(account);
       return account;
     },

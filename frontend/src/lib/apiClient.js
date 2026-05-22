@@ -129,4 +129,28 @@ export const uploadChatFile = async (formData) => {
   return res.data;
 };
 
+// --- Admin API ---
+export const fetchAdminStats = async () => {
+  const res = await apiClient.get("/admin/stats");
+  return res.data;
+};
+
+export const fetchAdminUsers = async () => {
+  const res = await apiClient.get("/admin/users");
+  return res.data;
+};
+
+export const fetchAdminAdvocates = async () => {
+  const res = await apiClient.get("/admin/advocates");
+  return res.data;
+};
+
+export const deleteAdminUser = async (userId) => {
+  await apiClient.delete(`/admin/users/${userId}`);
+};
+
+export const deleteAdminAdvocate = async (advocateId) => {
+  await apiClient.delete(`/admin/advocates/${advocateId}`);
+};
+
 export default apiClient;
