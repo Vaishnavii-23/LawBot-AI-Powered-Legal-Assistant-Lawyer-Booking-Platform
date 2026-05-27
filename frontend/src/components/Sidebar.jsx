@@ -49,6 +49,12 @@ const Sidebar = ({ sidebarOpen }) => {
     navigate("/");
   };
 
+  const handleProfileClick = () => {
+    if (user?.role === "lawyer") {
+      navigate("/lawyer/profile");
+    }
+  };
+
   return (
     <aside
       className={`fixed left-0 top-0 h-screen bg-gradient-to-b from-brand-600 via-brand-650 to-brand-700 shadow-xl z-50 flex flex-col overflow-hidden hover:shadow-2xl transition-all duration-300 ${
@@ -100,9 +106,16 @@ const Sidebar = ({ sidebarOpen }) => {
 
       {/* Profile Section */}
       <div className={`space-y-3 ${sidebarOpen ? "p-4" : "p-3"}`}>
-        <div className={`flex items-center rounded-xl bg-white/15 backdrop-blur-sm border border-white/10 hover:bg-white/20 transition-all duration-200 cursor-default hover:shadow-lg hover:shadow-black/20 ${
-          sidebarOpen ? "gap-3 p-4" : "justify-center p-3"
-        }`}>
+        <button
+          type="button"
+          onClick={handleProfileClick}
+          className={`flex items-center rounded-xl bg-white/15 backdrop-blur-sm border border-white/10 transition-all duration-200 hover:shadow-lg hover:shadow-black/20 ${
+            user?.role === "lawyer" ? "cursor-pointer hover:bg-white/20" : "cursor-default"
+          } ${
+            sidebarOpen ? "gap-3 p-4" : "justify-center p-3"
+          }`}
+          aria-label="Open profile"
+        >
           <div className={`flex items-center justify-center rounded-full bg-gradient-to-br from-white/30 to-white/10 text-white font-bold border border-white/20 flex-shrink-0 ${
             sidebarOpen ? "h-12 w-12" : "h-10 w-10"
           }`}>
@@ -114,7 +127,7 @@ const Sidebar = ({ sidebarOpen }) => {
               <p className="text-xs text-brand-200 capitalize font-medium">{user?.role}</p>
             </div>
           )}
-        </div>
+        </button>
 
         {/* Logout Button */}
         <button

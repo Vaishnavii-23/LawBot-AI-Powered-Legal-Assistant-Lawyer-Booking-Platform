@@ -11,10 +11,19 @@ import Home from "./pages/Home.jsx";
 import LawyerDashboard from "./pages/LawyerDashboard.jsx";
 import LawyerDetail from "./pages/LawyerDetail.jsx";
 import LawyersDirectory from "./pages/LawyersDirectory.jsx";
+import LawyerProfile from "./pages/LawyerProfile.jsx";
+import LawyerBookings from "./pages/LawyerBookings.jsx";
+import LawyerReviews from "./pages/LawyerReviews.jsx";
 import Login from "./pages/Login.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Register from "./pages/Register.jsx";
+import AdminUsers from "./pages/AdminUsers.jsx";
+import AdminAdvocates from "./pages/AdminAdvocates.jsx";
+import AdminBookings from "./pages/AdminBookings.jsx";
+import AdminAnalytics from "./pages/AdminAnalytics.jsx";
+import AdminSettings from "./pages/AdminSettings.jsx";
 import UserDashboard from "./pages/UserDashboard.jsx";
+import UserBookings from "./pages/UserBookings.jsx";
 
 const App = () => {
   const location = useLocation();
@@ -74,11 +83,101 @@ const App = () => {
             }
           />
           <Route
+            path="/lawyer/profile"
+            element={
+              <ProtectedRoute requiredRole="lawyer">
+                <AuthenticatedLayout>
+                  <LawyerProfile />
+                </AuthenticatedLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/lawyer/bookings"
+            element={
+              <ProtectedRoute requiredRole="lawyer">
+                <AuthenticatedLayout>
+                  <LawyerBookings />
+                </AuthenticatedLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/lawyer/reviews"
+            element={
+              <ProtectedRoute requiredRole="lawyer">
+                <AuthenticatedLayout>
+                  <LawyerReviews />
+                </AuthenticatedLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/admin/dashboard"
             element={
               <ProtectedRoute requiredRole="admin">
                 <AuthenticatedLayout>
                   <AdminDashboard />
+                </AuthenticatedLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AuthenticatedLayout>
+                  <AdminUsers />
+                </AuthenticatedLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/advocates"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AuthenticatedLayout>
+                  <AdminAdvocates />
+                </AuthenticatedLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/bookings"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AuthenticatedLayout>
+                  <AdminBookings />
+                </AuthenticatedLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/analytics"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AuthenticatedLayout>
+                  <AdminAnalytics />
+                </AuthenticatedLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/settings"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AuthenticatedLayout>
+                  <AdminSettings />
+                </AuthenticatedLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/user/bookings"
+            element={
+              <ProtectedRoute requiredRole="user">
+                <AuthenticatedLayout>
+                  <UserBookings />
                 </AuthenticatedLayout>
               </ProtectedRoute>
             }

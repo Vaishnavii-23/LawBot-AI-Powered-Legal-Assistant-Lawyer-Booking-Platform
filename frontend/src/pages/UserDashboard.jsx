@@ -4,8 +4,7 @@ import { useAuth } from "../contexts/AuthContext.jsx";
 import {
   fetchChatSessions,
   fetchLawyerById,
-  fetchUserBookings,
-  fetchUserReviews
+  fetchUserBookings
 } from "../lib/apiClient.js";
 
 const formatDateTime = (value) => {
@@ -25,11 +24,8 @@ const UserDashboard = () => {
   const [chatSessions, setChatSessions] = useState([]);
   const [bookings, setBookings] = useState([]);
   const [lawyerLookup, setLawyerLookup] = useState({});
-  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [reviewsLoading, setReviewsLoading] = useState(false);
-  const [reviewsError, setReviewsError] = useState(null);
 
   useEffect(() => {
     const load = async () => {
@@ -57,32 +53,6 @@ const UserDashboard = () => {
       }
     };
     load();
-  }, [user?.id]);
-
-  useEffect(() => {
-    if (!user?.id) return;
-    let active = true;
-    const loadReviews = async () => {
-      setReviewsLoading(true);
-      setReviewsError(null);
-      try {
-        const response = await fetchUserReviews(user.id);
-        if (!active) return;
-        setReviews(Array.isArray(response) ? response.slice(0, 5) : []);
-      } catch (err) {
-        if (!active) return;
-        setReviews([]);
-        setReviewsError(err.message || "Unable to load reviews");
-      } finally {
-        if (active) {
-          setReviewsLoading(false);
-        }
-      }
-    };
-    loadReviews();
-    return () => {
-      active = false;
-    };
   }, [user?.id]);
 
   useEffect(() => {
@@ -266,33 +236,6 @@ const UserDashboard = () => {
                       </Link>
                     </li>
                   </ul>
-                </div>
-                <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft">
-                  <h2 className="text-lg font-semibold text-slate-900">Recent feedback you left</h2>
-                  {reviewsLoading ? (
-                    <p className="mt-4 text-sm text-slate-500">Loading reviews…</p>
-                  ) : reviews?.length ? (
-                    <div className="mt-4 space-y-4">
-                      {reviews.map((review) => {
-                        const lawyerDetails = lawyerLookup[review.lawyer_id];
-                        const lawyerName = lawyerDetails?.full_name || lawyerDetails?.user?.full_name || `Lawyer #${review.lawyer_id}`;
-                        return (
-                          <div key={review.id} className="rounded-2xl border border-slate-200 p-4 text-sm text-slate-600">
-                            <div className="flex items-center gap-2 text-amber-600">
-                              <span className="font-semibold">Rating {review.rating}/5</span>
-                              <span className="text-slate-400">•</span>
-                              <span className="text-slate-500">{lawyerName}</span>
-                            </div>
-                            {review.comment ? <p className="mt-2 text-sm text-slate-600">“{review.comment}”</p> : null}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <p className="mt-4 text-sm text-slate-500">
-                      {reviewsError ? reviewsError : "Once you review a consultation, it will appear here."}
-                    </p>
-                  )}
                 </div>
               </div>
             </div>

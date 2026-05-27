@@ -145,6 +145,16 @@ export const fetchAdminAdvocates = async () => {
   return res.data;
 };
 
+export const fetchAdminBookings = async () => {
+  const res = await apiClient.get("/admin/bookings");
+  return res.data;
+};
+
+export const fetchAdminBookingRequests = async () => {
+  const res = await apiClient.get("/admin/booking-requests");
+  return res.data;
+};
+
 export const deleteAdminUser = async (userId) => {
   await apiClient.delete(`/admin/users/${userId}`);
 };
