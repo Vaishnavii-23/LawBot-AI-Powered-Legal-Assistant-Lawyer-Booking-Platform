@@ -26,8 +26,8 @@ import requests
 load_dotenv()
 
 # Paths to FAISS index and metadata
-INDEX_PATH = Path("data/index/faiss_index.bin")
-META_PATH = Path("data/index/chunks_metadata.json")
+INDEX_PATH = Path("vectordata/faiss_index.bin")
+META_PATH = Path("vectordata/chunks_metadata.json")
 
 # Embedding model
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
